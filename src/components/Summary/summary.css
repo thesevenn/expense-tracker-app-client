@@ -1,0 +1,102 @@
+div.summary-card {
+	/* width: min(40rem, 90vw); */
+	background-image: linear-gradient(
+		to top left,
+		hsla(260, 10%, 19%, 41%),
+		var(--gray-200)
+	);
+	border-radius: var(--rounded-md);
+	padding: 1.6rem;
+	grid-area: sm;
+}
+
+section.summary-headings {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.8rem;
+}
+
+strong.user-name {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: var(--purple-900);
+}
+
+p.brief-heading {
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: var(--gray-400);
+}
+
+section.summary-data {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@media only screen and (max-width: 540px) {
+	section.summary-data {
+		flex-direction: column;
+	}
+}
+
+div.credit-debit {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		"credit debit"
+		"net net";
+	gap: 0.8rem;
+}
+
+div.info-card {
+	background-color: var(--gray-300);
+	padding: 0.8rem 1.6rem;
+	border-radius: var(--rounded);
+}
+
+div.info-col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+div.card-credit {
+	grid-area: credit;
+}
+
+div.card-debit {
+	grid-area: debit;
+}
+div.card-net {
+	grid-area: net;
+}
+
+div.info-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+strong.action-heading {
+	font-size: 1.2rem;
+	font-weight: 400;
+	color: var(--gray-500);
+}
+span.amount {
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+
+.green {
+	color: var(--green-500);
+}
+
+.red {
+	color: var(--red-600);
+}

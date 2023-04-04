@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+	font-family: "Montserrat", sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: light dark;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+
+	--purple-100: hsl(260, 82%, 11%);
+	--purple-200: hsl(260, 82%, 19%);
+	--purple-300: hsl(260, 82%, 28%);
+	--purple-400: hsl(260, 82%, 39%);
+	--purple-500: hsl(260, 82%, 52%);
+	--purple-600: hsl(260, 82%, 61%);
+	--purple-700: hsl(260, 82%, 72%);
+	--purple-800: hsl(260, 82%, 83%);
+	--purple-900: hsl(260, 82%, 91%);
+	--purple-950: hsl(260, 82%, 97%);
+
+	--gray-100: hsl(280, 10%, 11%);
+	--gray-200: hsl(280, 10%, 19%);
+	--gray-300: hsl(280, 10%, 28%);
+	--gray-400: hsl(280, 10%, 39%);
+	--gray-500: hsl(280, 10%, 52%);
+	--gray-600: hsl(280, 10%, 61%);
+	--gray-700: hsl(280, 10%, 72%);
+	--gray-800: hsl(280, 10%, 83%);
+	--gray-900: hsl(280, 10%, 91%);
+	--gray-950: hsl(280, 10%, 97%);
+
+	--white-500: hsl(280, 50%, 100%);
+	--red-600: hsl(360, 82%, 61%);
+	--green-500: hsl(140, 82%, 41%);
+
+	--rounded-md: 0.8rem;
+	--rounded: 0.4rem;
+	--rounded-lg: 1.6rem;
+}
+
+*,
+*::after,
+::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+	font-family: "Montserrat", sans-serif;
+}
+
+a {
+	font-weight: 500;
+	color: #646cff;
+	text-decoration: inherit;
+}
+a:hover {
+	color: #535bf2;
+}
+
+body {
+	background-color: var(--gray-100);
+	margin: 0;
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-content: center;
+}
+
+h1 {
+	line-height: 1.1;
+}
+
+button {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+button:hover {
+	border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+	outline: 2px auto -webkit-focus-ring-color;
+}
+
+input {
+	outline: none;
+	border: none;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+}

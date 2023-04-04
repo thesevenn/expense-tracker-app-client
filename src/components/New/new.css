@@ -1,0 +1,56 @@
+section.transaction-new-card {
+	/* width: min(90%, 60rem); */
+	background-image: linear-gradient(
+		to bottom right,
+		var(--gray-200),
+		hsla(260, 10%, 19%, 41%)
+	);
+	padding: 1.6rem;
+	border-radius: var(--rounded-md);
+	/* height: 16rem; */
+	grid-area: nw;
+}
+
+h3.new-transaction-title {
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: var(--gray-600);
+	margin-bottom: 1.6rem;
+}
+
+select.transaction-type {
+	background-color: var(--gray-300);
+	padding: 0.8rem;
+	border-radius: var(--rounded);
+	outline: none;
+	border: 1px solid var(--gray-400);
+	text-transform: capitalize;
+	color: var(--gray-700);
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+
+select.transaction-type:hover {
+	border-color: var(--gray-500);
+}
+
+/* style for input field from signup */
+input.amount-field {
+	width: min(16rem, 70vw);
+	margin: 0.8rem;
+}
+
+input.description-field {
+	width: 30vw;
+	/* width: auto; */
+	margin: 0.4rem;
+}
+
+button.add-button {
+	background-color: var(--purple-500);
+	padding: 0.8rem 1.6rem;
+	font-size: 1.4rem;
+	font-weight: 600;
+	border-radius: var(--rounded);
+	box-shadow: 0 4px 4px #0001;
+}

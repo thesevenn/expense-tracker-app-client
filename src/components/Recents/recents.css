@@ -1,0 +1,79 @@
+div.recents-card {
+	display: flex;
+	flex-direction: column;
+	/* width: min(90vw, 60rem); */
+	background-image: linear-gradient(
+		to bottom right,
+		var(--gray-200),
+		hsla(260, 10%, 19%, 41%)
+	);
+	border-radius: var(--rounded-md);
+	padding: 1.6rem;
+	grid-area: rc;
+}
+
+section.transaction-list {
+	width: 100%;
+	/* flex-grow: 1; */
+}
+
+h3.recent-title {
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: var(--gray-600);
+	margin-bottom: 1.6rem;
+}
+
+div.record-entry {
+	width: 100%;
+	background-color: var(--gray-100);
+	display: flex;
+	padding: 0.4rem;
+	gap: 2.4rem;
+	font-size: 1.4rem;
+	border-radius: var(--rounded-md);
+	align-items: center;
+	/* justify-content: flex-start; */
+	margin: 0.4rem 0;
+	color: var(--gray-700);
+	text-align: left;
+}
+
+p.record-serial {
+	background-color: var(--gray-400);
+	padding: 0.4rem 1rem;
+	border-radius: var(--rounded);
+	color: var(--gray-950);
+}
+
+button.button-records {
+	background-color: var(--purple-500);
+	padding: 0.8rem 1.6rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin: 0.8rem 0;
+}
+
+p.credit-flag {
+	/* flex-grow: 1; */
+	text-align: right;
+}
+
+.debit {
+	color: var(--red-600);
+}
+
+.credit {
+	color: var(--green-500);
+}
+
+p.record-description {
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+p.record-amount {
+	margin-right: 0.8rem;
+	align-items: flex-end;
+	text-align: right;
+}
