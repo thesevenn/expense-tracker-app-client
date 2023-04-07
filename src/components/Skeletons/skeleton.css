@@ -1,0 +1,13 @@
+@import url("./pulse.animation.css");
+
+div.card-skeleton {
+	background-color: var(--gray-400);
+	padding: 0.8rem;
+	border-radius: var(--rounded);
+	margin: 0.8rem;
+}
+
+div.button-skeleton {
+	background-color: var(--gray-400);
+	padding: 0.8rem 1.2rem;
+}

@@ -6,15 +6,19 @@ import {
 	useContext,
 } from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {AiFillEyeInvisible, AiFillEye} from "react-icons/ai";
 
 import "../Signup/signup.css";
 import Credentials from "../../types/credentials.type";
 import api from "../../api";
 import {AuthContext} from "../../context/AuthContext";
+import Loader from "../Loader";
 
 export default function Login(): ReactElement {
 	const navigate = useNavigate();
-	const {auth, setAuth, setError, user, setUser, setMessage} =
+	const [loading, setLoading] = useState<boolean>(false);
+
+	const {auth, setAuth, setError, user, setUser, setMessage, error} =
 		useContext(AuthContext);
 	if (auth && user) {
 		navigate("/dashboard", {replace: true});
@@ -25,6 +29,8 @@ export default function Login(): ReactElement {
 		password: "",
 	});
 
+	const [type, setType] = useState<"text" | "password">("password");
+
 	function handleInput(e: ChangeEvent<HTMLInputElement>) {
 		console.log(e.target.name);
 
@@ -33,24 +39,33 @@ export default function Login(): ReactElement {
 
 	async function handleLogin(e: MouseEvent) {
 		e.preventDefault();
+		setLoading(true);
 
 		try {
 			if (user && auth) {
-				navigate("/dashboard");
+				navigate("/dashboard", {replace: true});
 			} else {
 				const response = await api.post("/auth/login", credentials);
 
-				if (response.data.success == false) {
-					setError(response.data.message);
-					setAuth(false);
-				} else {
+				if (
+					response.data &&
+					response.data.success == true &&
+					response.data.auth == true
+				) {
 					setAuth(true);
 					setUser(response.data.user);
 					setMessage(response.data.message);
-					navigate("/dashboard");
+					setError("");
+					navigate("/dashboard", {replace: true});
+					setLoading(false);
+				} else {
+					setError(response.data.message);
+					setLoading(false);
+					setAuth(false);
 				}
 			}
 		} catch (error) {
+			setLoading(false);
 			if (error instanceof Error) {
 				console.log(error.message);
 			}
@@ -58,6 +73,8 @@ export default function Login(): ReactElement {
 	}
 	return (
 		<>
+			{loading && <Loader message="Logging in..." />}
+			{error && <div className="error-message">{error}</div>}
 			<section className="auth-card">
 				<h1 className="brand-name">Finax</h1>
 				<form className="form-area">
@@ -76,14 +93,21 @@ export default function Login(): ReactElement {
 						</label>
 					</div>
 					<div className="input-area">
+						<i
+							className="eye-icon"
+							onClick={e => setType(type == "text" ? "password" : "text")}
+						>
+							{type == "password" ? <AiFillEye /> : <AiFillEyeInvisible />}
+						</i>
 						<input
-							type="text"
+							type={type}
 							id="password"
 							name="password"
 							className="input-field"
 							onChange={e => handleInput(e)}
 							required
 						/>
+
 						<label htmlFor="password" className="label-for">
 							password
 						</label>

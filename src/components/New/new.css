@@ -36,7 +36,7 @@ select.transaction-type:hover {
 
 /* style for input field from signup */
 input.amount-field {
-	width: min(16rem, 70vw);
+	width: min(16rem, 80vw);
 	margin: 0.8rem;
 }
 
@@ -53,4 +53,17 @@ button.add-button {
 	font-weight: 600;
 	border-radius: var(--rounded);
 	box-shadow: 0 4px 4px #0001;
+}
+
+@media only screen and (max-width: 540px) {
+	input.amount-field {
+		width: min(25rem, 60vw);
+		/* margin-left: 0; */
+	}
+
+	input.description-field {
+		width: min(50rem, 90vw);
+		margin-left: 0;
+		margin-bottom: 1.2rem;
+	}
 }

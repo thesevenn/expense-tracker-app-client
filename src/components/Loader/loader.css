@@ -1,0 +1,73 @@
+.loader-page {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #0005;
+	height: 100vh;
+	overflow: hidden;
+	backdrop-filter: blur(6px);
+	z-index: 10;
+}
+
+div.spinner-card {
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--purple-500);
+	width: 18rem;
+	aspect-ratio: 4/1;
+	border-radius: var(--rounded-md);
+	padding: 0.4rem;
+	box-shadow: 0 4px 4px var(--purple-500);
+}
+
+div.spinner-card > div {
+	position: relative;
+}
+
+div.spinner-container {
+	width: 100%;
+	position: relative;
+}
+
+.spinner-container .spinner {
+	left: 1.2rem;
+	position: absolute;
+	width: 32px;
+	background-color: transparent;
+	border: 6px solid var(--purple-500);
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	border-color: var(--purple-900) transparent transparent transparent;
+	animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+div.action-text {
+	width: 100%;
+	position: absolute;
+	font-size: 1.4rem;
+	font-weight: 800;
+	left: 6rem;
+	top: 0.5rem;
+}
+
+.spinner:nth-child(2) {
+	animation-delay: -0.4s;
+}
+.spinner:nth-child(3) {
+	animation-delay: -0.3s;
+}
+
+.spinner:nth-child(4) {
+	animation-delay: -0.15s;
+}
+
+@keyframes spinner {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

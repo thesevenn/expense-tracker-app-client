@@ -41,7 +41,7 @@ export default function App() {
 				/>
 				<Route
 					path="/signup"
-					element={!authenticated ? <Signup /> : <Navigate to="/" />}
+					element={!authenticated ? <Signup /> : <Navigate to="/dashboard" />}
 				/>
 			</Routes>
 		</>

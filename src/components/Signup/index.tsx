@@ -1,13 +1,17 @@
 import {ChangeEvent, MouseEvent, ReactElement, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {AiFillEyeInvisible, AiFillEye} from "react-icons/ai";
 
 import "./signup.css";
 import Credentials from "../../types/credentials.type";
 import api from "../../api";
+import Loader from "../Loader";
 
 export default function Signup(): ReactElement {
 	const navigate = useNavigate();
 	const [error, setError] = useState<string>("");
+	const [loading, setLoading] = useState<boolean>(false);
+	const [type, setType] = useState<"text" | "password">("password");
 	const [credentials, setCredentials] = useState<Credentials>({
 		email: "",
 		password: "",
@@ -20,15 +24,19 @@ export default function Signup(): ReactElement {
 
 	async function handleSubmit(e: MouseEvent) {
 		e.preventDefault();
+		setLoading(true);
 		try {
 			const response = await api.post("/auth/sign-up", credentials);
 			if (response.data.success == false) {
 				setError(response.data.message);
+				setLoading(false);
 			} else {
-				console.log(response.data);
 				navigate("/login");
+				setLoading(false);
+				setError("");
 			}
 		} catch (error) {
+			setLoading(false);
 			if (error instanceof Error) {
 				console.log(error.message);
 			}
@@ -36,6 +44,8 @@ export default function Signup(): ReactElement {
 	}
 	return (
 		<>
+			{loading && <Loader message="Signingup..." />}
+			{error && <div className="error-message">{error}</div>}
 			<section className="auth-card">
 				<h1 className="brand-name">FinaX</h1>
 				<form className="form-area">
@@ -67,8 +77,14 @@ export default function Signup(): ReactElement {
 						</label>
 					</div>
 					<div className="input-area">
+						<i
+							className="eye-icon"
+							onClick={e => setType(type == "text" ? "password" : "text")}
+						>
+							{type == "password" ? <AiFillEye /> : <AiFillEyeInvisible />}
+						</i>
 						<input
-							type="text"
+							type={type}
 							id="password"
 							name="password"
 							className="input-field"

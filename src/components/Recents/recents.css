@@ -77,3 +77,11 @@ p.record-amount {
 	align-items: flex-end;
 	text-align: right;
 }
+
+div.no-content {
+	font-size: 1.6rem;
+	width: auto;
+	height: 30rem;
+	background-color: var(--gray-100);
+	color: var(--gray-700);
+}

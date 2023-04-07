@@ -3,7 +3,7 @@
 	width: min(28rem, 85vw);
 	height: 3.6rem;
 	border-radius: var(--rounded);
-	margin: 1.6rem;
+	margin: 1.2rem 1.6rem;
 	padding: 0.4rem 1rem;
 	font-size: 1.4rem;
 	color: var(--gray-700);
@@ -102,7 +102,7 @@ h1.brand-name {
 	font-size: 1.4rem;
 	font-weight: 500;
 	box-shadow: 0 2px 2px var(--purple-400);
-	margin: 2.4rem;
+	margin: 2rem 2.4rem;
 	margin-top: 3.2rem;
 }
 
@@ -118,7 +118,38 @@ h1.brand-name {
 	margin: 2.4rem;
 }
 
+i.eye-icon {
+	position: absolute;
+	left: 27rem;
+	top: 2.1rem;
+	font-size: 1.6rem;
+	color: var(--gray-700);
+	cursor: pointer;
+}
+
 .error-accent {
 	border: 1px solid var(--red-600);
 	box-shadow: 0 0 12px hsla(360, 82%, 61%, 0.4);
 }
+.error-message {
+	width: min(40rem, 90vw);
+	display: block;
+	background-color: hsla(360, 82%, 61%, 0.1);
+	color: var(--red-600);
+	font-size: 1.4rem;
+	text-align: center;
+	margin: 1.6rem auto;
+	padding: 0.8rem 1.6rem;
+	border-radius: var(--rounded);
+	border: 1px solid var(--red-600);
+}
+
+/* 
+return icon and state 
+
+useChangeInputType => takes inital value, true or false and returns state value after change and function 
+
+useChangeInputType(false) => [type,setType,icon]
+
+
+*/

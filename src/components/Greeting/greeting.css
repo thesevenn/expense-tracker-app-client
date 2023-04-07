@@ -20,6 +20,21 @@ h1.greet-title {
 	font-weight: 700;
 	color: var(--purple-600);
 	text-align: right;
+	text-transform: capitalize;
+}
+
+@media only screen and (max-width: 780px) {
+	h1.greet-title {
+		font-size: 1.8rem;
+	}
+
+	p.greet-para {
+		font-size: 1.2rem;
+	}
+
+	.date-time {
+		font-size: 1.2rem;
+	}
 }
 
 p.greet-para {

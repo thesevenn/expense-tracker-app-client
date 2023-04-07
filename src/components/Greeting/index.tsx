@@ -2,7 +2,10 @@ import React, {ReactElement, useEffect, useState} from "react";
 
 import "./greeting.css";
 
-export default function Greeting(): ReactElement {
+interface PropType {
+	name: string;
+}
+export default function Greeting({name}: PropType): ReactElement {
 	const [time, setTime] = useState<Date>(new Date());
 
 	useEffect(() => {
@@ -23,7 +26,7 @@ export default function Greeting(): ReactElement {
 					</p>
 				</div>
 				<div className="greet-section">
-					<h1 className="greet-title">Good Morning, Sofiya</h1>
+					<h1 className="greet-title">Good Morning{", " + name || ""}</h1>
 					<p className="greet-para">What are your plans for today?</p>
 				</div>
 			</section>

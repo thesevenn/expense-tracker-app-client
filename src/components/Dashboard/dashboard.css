@@ -2,12 +2,21 @@ section.dashboard-grid {
 	width: 100%;
 	display: grid;
 	padding: 1rem;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 10rem;
-	grid-template-rows: auto;
-	grid-template-areas:
+	/* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 10rem; */
+	/* grid-template-rows: auto; */
+	/* grid-template-areas:
 		"gr gr gr sm sm sd"
 		"nw nw nw st st sd"
-		"rc rc rc st st sd";
+		"rc rc rc st st sd"; */
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"sd"
+		"gr"
+		"nw"
+		"rc"
+		"sm"
+		"st";
+
 	gap: 1.6rem;
 }
 
