@@ -1,5 +1,4 @@
-import {useContext} from "react";
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 
 import Layout from "./Layout";
 import Login from "./components/Login";
@@ -7,42 +6,25 @@ import {Protected} from "./components/Protected";
 import Error from "./Error";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
-import {AuthContext} from "./context/AuthContext";
+import Records from "./components/Records";
 
 export default function App() {
-	const {auth, user} = useContext(AuthContext);
-	console.log(auth, user);
-
-	const authenticated = auth && user;
-	console.log(authenticated, "au");
-
 	return (
 		<>
 			<Routes>
-				<Route element={<Layout />} errorElement={<Error />}>
-					<Route element={<Protected />} errorElement={<Error />}>
+				<Route element={<Layout />}>
+					<Route element={<Protected />}>
 						<Route path="/">
 							<Route element={<Dashboard />} />
 						</Route>
 
 						<Route index path="/dashboard" element={<Dashboard />} />
-						<Route path="user/records" element={<div>records</div>} />
+						<Route path="user/records" element={<Records />} />
 					</Route>
 				</Route>
-				<Route
-					path="/login"
-					element={
-						authenticated ? (
-							<Navigate to={{pathname: "/dashboard"}} />
-						) : (
-							<Login />
-						)
-					}
-				/>
-				<Route
-					path="/signup"
-					element={!authenticated ? <Signup /> : <Navigate to="/dashboard" />}
-				/>
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="*" element={<Error />} />
 			</Routes>
 		</>
 	);

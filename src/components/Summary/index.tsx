@@ -2,6 +2,7 @@ import {ReactElement, useState, useEffect} from "react";
 
 import "./summary.css";
 import api from "../../api";
+import DoughnutChart from "../Chart";
 
 interface PropType {
 	name: string;
@@ -17,6 +18,7 @@ interface Summary {
 
 export default function Summary({name}: PropType): ReactElement {
 	const [summary, setSummary] = useState<Summary>();
+
 	useEffect(() => {
 		fetchSummary();
 	}, []);
@@ -39,6 +41,8 @@ export default function Summary({name}: PropType): ReactElement {
 	// net diffenrence and symbol with seperation
 	const net: number = +(summary?.credited || 0) - +(summary?.debited || 0);
 	const symbol = net >= 0 ? "+" : "-";
+	let debit = Number(summary?.debited) || 0.0;
+	let credit = Number(summary?.credited) || 0.0;
 
 	return (
 		<>
@@ -68,7 +72,9 @@ export default function Summary({name}: PropType): ReactElement {
 							</span>
 						</div>
 					</div>
-					<div className="donut-chart">donut chart</div>
+					<div className="donut-chart">
+						<DoughnutChart dataset={[credit, credit, credit]} />
+					</div>
 				</section>
 			</div>
 		</>

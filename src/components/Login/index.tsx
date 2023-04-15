@@ -2,6 +2,7 @@ import {
 	MouseEvent,
 	ReactElement,
 	useState,
+	useEffect,
 	ChangeEvent,
 	useContext,
 } from "react";
@@ -16,13 +17,27 @@ import Loader from "../Loader";
 
 export default function Login(): ReactElement {
 	const navigate = useNavigate();
-	const [loading, setLoading] = useState<boolean>(false);
-
 	const {auth, setAuth, setError, user, setUser, setMessage, error} =
 		useContext(AuthContext);
-	if (auth && user) {
-		navigate("/dashboard", {replace: true});
-	}
+	useEffect(() => {
+		(async () => {
+			const response = await api.get("/auth/new-access");
+			if (response.data.success == true) {
+				setAuth(true);
+				setUser(response.data.user);
+				navigate("/dashboard", {replace: true});
+			} else {
+				setAuth(false);
+				navigate("/login", {replace: true});
+			}
+		})();
+	}, [auth]);
+
+	const [loading, setLoading] = useState<boolean>(false);
+
+	// if (auth && user) {
+	// 	navigate("/dashboard", {replace: true});
+	// }
 
 	const [credentials, setCredentials] = useState<Credentials>({
 		email: "",
@@ -53,6 +68,7 @@ export default function Login(): ReactElement {
 					response.data.auth == true
 				) {
 					setAuth(true);
+					localStorage.setItem("auth", "true");
 					setUser(response.data.user);
 					setMessage(response.data.message);
 					setError("");
@@ -78,7 +94,7 @@ export default function Login(): ReactElement {
 			<section className="auth-card">
 				<h1 className="brand-name">Finax</h1>
 				<form className="form-area">
-					<h2 className="action-title">Login </h2>
+					<h2 className="action-title">Welcome Back</h2>
 					<div className="input-area">
 						<input
 							type="text"

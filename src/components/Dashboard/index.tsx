@@ -37,7 +37,7 @@ export default function Dashboard(): ReactElement {
 	});
 
 	useEffect(() => {
-		if (auth && user) {
+		if (auth) {
 			fetchRecents();
 		} else {
 			navigate("/login", {replace: true});
