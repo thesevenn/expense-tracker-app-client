@@ -1,5 +1,5 @@
 .records-page {
-	width: min(80rem, 90vw);
+	width: min(80rem, 98vw);
 	padding-top: 0.8rem;
 }
 
@@ -8,7 +8,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 1.2rem;
-	margin-top: 1.6rem;
+	margin-block: 1.6rem;
 }
 .filter-title {
 	font-size: 1.6rem;
@@ -51,6 +51,27 @@
 	padding: 0.8rem;
 	border-radius: var(--rounded-md);
 }
+
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.page-current {
+	background-color: var(--gray-400);
+	padding: 0.4rem 2.4rem;
+	border-radius: var(--rounded);
+	font-size: 1.8rem;
+	font-weight: 600;
+	color: var(--purple-900);
+}
+
+.pagination .button {
+	background: var(--purple-500);
+	padding: 0.4rem 1.2rem;
+	width: 6rem;
+}
+
 @media screen and (max-width: 720px) {
 	.filter-section {
 		flex-direction: column;
@@ -60,5 +81,15 @@
 
 	.filter-button {
 		padding: 0.8rem 1.2rem;
+	}
+
+	.records-list {
+		background-image: linear-gradient(
+			to bottom right,
+			var(--gray-200),
+			hsla(260, 10%, 19%, 41%)
+		);
+		padding: 0.8rem 0.2rem;
+		border-radius: var(--rounded-md);
 	}
 }

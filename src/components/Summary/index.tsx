@@ -73,7 +73,7 @@ export default function Summary({name}: PropType): ReactElement {
 						</div>
 					</div>
 					<div className="donut-chart">
-						<DoughnutChart dataset={[credit, credit, credit]} />
+						<DoughnutChart dataset={[net, debit, credit]} />
 					</div>
 				</section>
 			</div>

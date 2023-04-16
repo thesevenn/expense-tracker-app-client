@@ -1,32 +1,42 @@
-export default function getMonthName(month: string): string {
-	let monthName = "January";
-	console.log(month, typeof month);
-
+export default function getMonthName(month: number): string {
+	let monthName = "";
 	switch (month) {
-		case "0":
+		case 0:
 			monthName = "January";
-		case "1":
+			break;
+		case 1:
 			monthName = "February";
-		case "2":
+			break;
+		case 2:
 			monthName = "March";
-		case "3":
+			break;
+		case 3:
 			monthName = "April";
-		case "4":
+			break;
+		case 4:
 			monthName = "May";
-		case "5":
+			break;
+		case 5:
 			monthName = "June";
-		case "6":
+			break;
+		case 6:
 			monthName = "July";
-		case "7":
+			break;
+		case 7:
 			monthName = "August";
-		case "8":
+			break;
+		case 8:
 			monthName = "September";
-		case "9":
+			break;
+		case 9:
 			monthName = "October";
-		case "10":
+			break;
+		case 10:
 			monthName = "Novemer";
-		case "11":
+			break;
+		case 11:
 			monthName = "December";
+			break;
 		default:
 			monthName;
 	}

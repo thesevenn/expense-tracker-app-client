@@ -1,10 +1,17 @@
-import {ReactElement, useState, useEffect} from "react";
+import {
+	ReactElement,
+	useState,
+	useEffect,
+	useReducer,
+	ReducerState,
+} from "react";
 
 import "./records.css";
 import Sidebar from "../Sidebar";
 import {Record} from "../Recents";
 import api from "../../api";
 import getMonthName from "../../utils/getMonthName";
+import {Action} from "@remix-run/router";
 
 interface Filter {
 	year: number;
@@ -22,29 +29,43 @@ export default function Records(): ReactElement {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
-		fetchRecords(year, month, 1);
+		(async () => {
+			const response = await api.get("/users/records?page=1&count=15");
+			if (response.data?.success) {
+				setRecords(response.data.records);
+			}
+		})();
 	}, []);
+
+	useEffect(() => {
+		fetchRecords(filter.year, filter.month, page);
+	}, [filter, page]);
 
 	function applyFilters(): void {
 		setDisableNext(false);
 		setPage(1);
 		setFilter({year: year, month: month});
-		fetchRecords(filter.year, filter.month);
+		console.log(filter);
+
+		// fetchRecords(filter.year, filter.month);
 	}
 
 	function handleNext() {
 		setPage(page + 1);
-		fetchRecords(filter.year, filter.month, page);
+		fetchRecords(filter.year, filter.month, page + 1);
+		console.log(page, "next");
 	}
+
+	console.log(page, "corr");
 
 	function handlePrev() {
 		setDisableNext(false);
 		if (page > 1) {
 			setPage(page - 1);
-			fetchRecords(filter.year, filter.month, page);
+			// fetchRecords(filter.year, filter.month, page - 1);
 		}
+		console.log(page, "prev");
 	}
-	console.log(filter);
 
 	async function fetchRecords(
 		year?: number,
@@ -52,22 +73,31 @@ export default function Records(): ReactElement {
 		page: number = 1,
 		count: number = 15
 	): Promise<void> {
-		const queryString = "";
-		const response = await api.get(
-			`/users/records?year=${year}&month=${month}&page=${page}&count=${count}`
-		);
+		let queryString = `?page=${page}&count=${count}`;
+		if (year && !month) {
+			queryString = `?year=${year}&page=${page}&count=${count}`;
+		} else if (month) {
+			year = year || date.getFullYear();
+			queryString = `?year=${year}&month=${month}&page=${page}&count=${count}`;
+		}
+		console.log(filter);
+
+		const response = await api.get(`/users/records${queryString}`);
+		console.log(response.data);
 
 		if (response.data?.success) {
 			setRecords(response.data.records);
+
 			if (response.data.total < count) {
+				setDisableNext(true);
+			} else if (response.data.total == 0) {
+				setPage(page - 1);
 				setDisableNext(true);
 			} else {
 				setDisableNext(false);
 			}
-			console.log(response.data);
-		} else {
-			console.log(response.data);
 		}
+		console.log(queryString, "qs");
 	}
 
 	return (
@@ -76,7 +106,7 @@ export default function Records(): ReactElement {
 				<Sidebar />
 				<section className="filter-section">
 					<h1 className="filter-title">
-						Records for {}, {date.getFullYear()}
+						Records for {getMonthName(filter.month)}, {year}
 					</h1>
 					<div className="filters-control">
 						<div>
@@ -84,16 +114,22 @@ export default function Records(): ReactElement {
 								Month
 							</label>
 							<select
+								defaultValue=""
 								name="month"
 								id="month"
 								className="filter"
-								defaultValue={new Date().getMonth()}
-								defaultChecked={true}
 								onChange={e => setMonth(Number(e.target.value))}
 							>
-								<option value={1}>April</option>
-								<option value={2}>May</option>
-								<option value={3}>Sept</option>
+								<option disabled hidden value="">
+									select
+								</option>
+								{Array(date.getMonth() + 1)
+									.fill("")
+									.map((month, index) => (
+										<option key={index} value={index + 1}>
+											{getMonthName(index)}
+										</option>
+									))}
 							</select>
 						</div>
 						<div>
@@ -104,12 +140,15 @@ export default function Records(): ReactElement {
 								name="year"
 								id="year"
 								className="filter"
-								defaultValue={new Date().getFullYear()}
-								defaultChecked={true}
 								onChange={e => setYear(Number(e.target.value))}
 							>
-								<option value={2023}>2023</option>
-								<option value={2022}>2022</option>
+								{Array(date.getFullYear() - 2020)
+									.fill(0)
+									.map((year, index) => (
+										<option key={index} value={date.getFullYear() - index}>
+											{date.getFullYear() - index}
+										</option>
+									))}
 							</select>
 						</div>
 						<button className="filter-button" onClick={() => applyFilters()}>
@@ -118,10 +157,13 @@ export default function Records(): ReactElement {
 					</div>
 				</section>
 				<section className="records-list">
-					{records &&
+					{records?.length ? (
 						records.map((record, index) => (
 							<Record key={record.id} {...record} index={index} />
-						))}
+						))
+					) : (
+						<div className="no-content">Nothing to Show Here.</div>
+					)}
 				</section>
 				<section className="pagination">
 					<button
@@ -131,7 +173,7 @@ export default function Records(): ReactElement {
 					>
 						prev
 					</button>
-					<span className="page-current">{page}</span>
+					<div className="page-current">{page}</div>
 					<button
 						className="next-button button"
 						disabled={disableNext}

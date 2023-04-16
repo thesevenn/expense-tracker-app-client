@@ -44,7 +44,7 @@ export default function Recents({records, loading}: PropType): ReactElement {
 				</section>
 				<div>
 					{loading ? (
-						<ButtonSkeleton />
+						""
 					) : records.length ? (
 						<Link to="/user/records">
 							<button className="button-records">Show more</button>
