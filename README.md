@@ -2,7 +2,7 @@
 
 An Application to manage financial and personal transactions, built using **Vite** + _**React**_ + _**TypeScript**_
 
-> :card_index:
+> :warning:
 
 ---
 
