@@ -1,4 +1,5 @@
-# **Finax**
+# ![IMAGE](./src/assets/finax.svg)  **Finax**
+
 An Application to manage financial and personal transactions, built using **Vite** + _**React**_ + _**TypeScript**_
 
 ---
@@ -23,3 +24,12 @@ An Application to manage financial and personal transactions, built using **Vite
 ```
  cp .env.example .env.local
 ```
+3. Move to the project folder and run `yarn dev`
+```
+cd ./expense_tracker_app_client
+yarn dev
+```
+
+See results at `http://localhost:5173`
+
+## LICENSE
