@@ -2,13 +2,8 @@
 
 An Application to manage financial and personal transactions, built using **Vite** + _**React**_ + _**TypeScript**_
 
-<<<<<<< HEAD
-> :warning: **Warning**
-=======
 > **Warning** 
 > This app depends on backend service hosted on a metered hosting service, so Application might not be available at sometimes.
->>>>>>> 923c00fec9cff6448773d1ebf13583fd8dd9638f
-
 ---
 
 ## **Demo**
