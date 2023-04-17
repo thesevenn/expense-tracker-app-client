@@ -20,5 +20,3 @@ An Application to manage financial and personal transactions, built using **Vite
 ```
  cp .env.example .env.local
 ```
-
-[Hello]('https://goggle/com')
