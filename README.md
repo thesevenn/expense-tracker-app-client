@@ -33,4 +33,4 @@ yarn dev
 See results at `http://localhost:5173`
 
 ## LICENSE
-> Licensed Under Standard [MIT LICENSE]('./LICENSE)
+> Licensed Under Standard [MIT LICENSE]('/LICENSE)
