@@ -80,5 +80,3 @@ export default function Summary({name}: PropType): ReactElement {
 		</>
 	);
 }
-
-// avg income = total credit/12 avg. expense = total debit/12

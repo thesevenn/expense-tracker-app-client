@@ -64,22 +64,26 @@ export default function Dashboard(): ReactElement {
 	}
 
 	async function newRecord() {
-		try {
-			setLoding(prev => ({...prev, new: true}));
-			const response = await api.post("/users/records", transaction);
-			setTransaction({amount: "", description: "", credit: false});
-			if (!response.data) {
-				setError(response.data.message);
-				setLoding(prev => ({...prev, recent: false}));
-			} else {
-				fetchRecents();
-				setTransaction({credit: false, description: "", amount: ""});
-				setLoding(prev => ({...prev, recent: false}));
-			}
-		} catch (error) {
-			setLoding(prev => ({...prev, recent: true}));
-			if (error instanceof Error) {
-				console.log(error.message);
+		if (transaction.description == "" || transaction.amount == "") {
+			setError("amount and description are required");
+		} else {
+			try {
+				setLoding(prev => ({...prev, new: true}));
+				const response = await api.post("/users/records", transaction);
+				setTransaction({amount: "", description: "", credit: false});
+				if (!response.data) {
+					setError(response.data.message);
+					setLoding(prev => ({...prev, recent: false}));
+				} else {
+					fetchRecents();
+					setTransaction({credit: false, description: "", amount: ""});
+					setLoding(prev => ({...prev, recent: false}));
+				}
+			} catch (error) {
+				setLoding(prev => ({...prev, recent: true}));
+				if (error instanceof Error) {
+					console.log(error.message);
+				}
 			}
 		}
 	}

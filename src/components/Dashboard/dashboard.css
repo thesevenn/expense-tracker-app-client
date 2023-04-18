@@ -2,12 +2,6 @@ section.dashboard-grid {
 	width: 100%;
 	display: grid;
 	padding: 1rem;
-	/* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 10rem; */
-	/* grid-template-rows: auto; */
-	/* grid-template-areas:
-		"gr gr gr sm sm sd"
-		"nw nw nw st st sd"
-		"rc rc rc st st sd"; */
 	grid-template-columns: 1fr;
 	grid-template-areas:
 		"sd"
@@ -18,27 +12,4 @@ section.dashboard-grid {
 		"st";
 
 	gap: 1.6rem;
-}
-
-@media only screen and (max-width: 1500px) {
-	section.dashboard-grid {
-		grid-template-columns: repeat(6, 1fr);
-		grid-template-areas:
-			"sd sd sd sd sd sd"
-			"gr gr gr gr sm sm"
-			"nw nw nw nw st st"
-			"rc rc rc rc st st";
-	}
-}
-@media only screen and (max-width: 1200px) {
-	section.dashboard-grid {
-		grid-template-columns: 1fr;
-		grid-template-areas:
-			"sd"
-			"gr"
-			"nw"
-			"rc"
-			"sm"
-			"st";
-	}
 }

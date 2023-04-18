@@ -6,6 +6,7 @@ import "./signup.css";
 import Credentials from "../../types/credentials.type";
 import api from "../../api";
 import Loader from "../Loader";
+import {validateEmail} from "../../utils/validation";
 
 export default function Signup(): ReactElement {
 	const navigate = useNavigate();
@@ -19,26 +20,39 @@ export default function Signup(): ReactElement {
 	});
 
 	function handleInput(e: ChangeEvent<HTMLInputElement>) {
+		setError("");
 		setCredentials(prev => ({...prev, [e.target.name]: e.target.value}));
 	}
 
 	async function handleSubmit(e: MouseEvent) {
 		e.preventDefault();
-		setLoading(true);
-		try {
-			const response = await api.post("/auth/sign-up", credentials);
-			if (response.data.success == false) {
-				setError(response.data.message);
+
+		if (
+			credentials.email == "" ||
+			credentials.password == "" ||
+			credentials.name == ""
+		) {
+			setError("Required fields cannot be empty");
+		} else if (!validateEmail(credentials.email)) {
+			setError("Please enter a valid email.");
+		} else {
+			setLoading(true);
+
+			try {
+				const response = await api.post("/auth/sign-up", credentials);
+				if (response.data.success == false) {
+					setError(response.data.message);
+					setLoading(false);
+				} else {
+					navigate("/login");
+					setLoading(false);
+					setError("");
+				}
+			} catch (error) {
 				setLoading(false);
-			} else {
-				navigate("/login");
-				setLoading(false);
-				setError("");
-			}
-		} catch (error) {
-			setLoading(false);
-			if (error instanceof Error) {
-				console.log(error.message);
+				if (error instanceof Error) {
+					console.log(error.message);
+				}
 			}
 		}
 	}

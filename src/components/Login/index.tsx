@@ -14,6 +14,7 @@ import Credentials from "../../types/credentials.type";
 import api from "../../api";
 import {AuthContext} from "../../context/AuthContext";
 import Loader from "../Loader";
+import {validateEmail} from "../../utils/validation";
 
 export default function Login(): ReactElement {
 	const navigate = useNavigate();
@@ -35,10 +36,6 @@ export default function Login(): ReactElement {
 
 	const [loading, setLoading] = useState<boolean>(false);
 
-	// if (auth && user) {
-	// 	navigate("/dashboard", {replace: true});
-	// }
-
 	const [credentials, setCredentials] = useState<Credentials>({
 		email: "",
 		password: "",
@@ -47,43 +44,50 @@ export default function Login(): ReactElement {
 	const [type, setType] = useState<"text" | "password">("password");
 
 	function handleInput(e: ChangeEvent<HTMLInputElement>) {
-		console.log(e.target.name);
-
+		setError("");
 		setCredentials(prev => ({...prev, [e.target.name]: e.target.value}));
 	}
 
 	async function handleLogin(e: MouseEvent) {
 		e.preventDefault();
-		setLoading(true);
 
-		try {
-			if (user && auth) {
-				navigate("/dashboard", {replace: true});
-			} else {
-				const response = await api.post("/auth/login", credentials);
+		if (credentials.email == "" || credentials.password == "") {
+			setError("Required fields cannot be empty");
+		} else if (!validateEmail(credentials.email)) {
+			setError("Please enter a valid email.");
+		} else {
+			setError("");
+			setLoading(true);
 
-				if (
-					response.data &&
-					response.data.success == true &&
-					response.data.auth == true
-				) {
-					setAuth(true);
-					localStorage.setItem("auth", "true");
-					setUser(response.data.user);
-					setMessage(response.data.message);
-					setError("");
+			try {
+				if (user && auth) {
 					navigate("/dashboard", {replace: true});
-					setLoading(false);
 				} else {
-					setError(response.data.message);
-					setLoading(false);
-					setAuth(false);
+					const response = await api.post("/auth/login", credentials);
+
+					if (
+						response.data &&
+						response.data.success == true &&
+						response.data.auth == true
+					) {
+						setAuth(true);
+						localStorage.setItem("auth", "true");
+						setUser(response.data.user);
+						setMessage(response.data.message);
+						setError("");
+						navigate("/dashboard", {replace: true});
+						setLoading(false);
+					} else {
+						setError(response.data.message);
+						setLoading(false);
+						setAuth(false);
+					}
 				}
-			}
-		} catch (error) {
-			setLoading(false);
-			if (error instanceof Error) {
-				console.log(error.message);
+			} catch (error) {
+				setLoading(false);
+				if (error instanceof Error) {
+					console.log(error.message);
+				}
 			}
 		}
 	}
