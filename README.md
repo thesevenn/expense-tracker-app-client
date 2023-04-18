@@ -11,7 +11,7 @@ An Application to manage financial and personal transactions, built using **Vite
 
 ## **Demo**
 
-## Running locally
+### **Running locally**
 
 1. install dependencies using yarn
 
@@ -33,4 +33,4 @@ yarn dev
 See results at `http://localhost:5173`
 
 ## LICENSE
-> Licensed Under Standard [MIT LICENSE]('https://github.com/thesevenn/expense-tracker-app-client/blob/master/LICENSE')
+Licensed Under Standard [MIT LICENSE]('https://github.com/thesevenn/expense-tracker-app-client/blob/master/LICENSE')

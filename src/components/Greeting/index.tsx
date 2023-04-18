@@ -1,6 +1,7 @@
 import React, {ReactElement, useEffect, useState} from "react";
 
 import "./greeting.css";
+import partOfTheDay from "../../utils/partOfDay";
 
 interface PropType {
 	name: string;
@@ -26,7 +27,10 @@ export default function Greeting({name}: PropType): ReactElement {
 					</p>
 				</div>
 				<div className="greet-section">
-					<h1 className="greet-title">Good Morning{", " + name || ""}</h1>
+					<h1 className="greet-title">
+						Good {partOfTheDay(time.getHours())}
+						{", " + name || ""}
+					</h1>
 					<p className="greet-para">What are your plans for today?</p>
 				</div>
 			</section>

@@ -1,0 +1,29 @@
+.error-page {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.error-svg {
+	width: min(70rem, 80vw);
+	aspect-ratio: 1/1;
+}
+.error-action {
+	padding: 0.8rem;
+}
+
+.error-title {
+	font-size: 2.4rem;
+	font-weight: 600;
+	color: var(--gray-700);
+}
+@media screen and (max-width: 780px) {
+	.error-page {
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.error-title {
+		font-size: 1.6rem;
+	}
+}
