@@ -10,6 +10,7 @@ An Application to manage financial and personal transactions, built using **Vite
 ---
 
 ## **Demo**
+![Demo](https://user-images.githubusercontent.com/83214237/233476600-68fc1974-d8ce-4f74-a2cf-b6e609cb3e7a.png))
 
 ## **About the Project**
 Right Now I'm using this project to keep my financial history at one place. I built this application to revise some React concepts and Authentication process.

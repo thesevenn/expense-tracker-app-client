@@ -6,7 +6,7 @@
 .records-page > .sidebar {
 	align-self: flex-start;
 	position: relative;
-	top: -6%;
+	/* top: -6%; */
 }
 
 .filter-section {
